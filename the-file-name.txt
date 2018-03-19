@@ -1,0 +1,1 @@
+privateclass java.lang.String nome;/nprivateclass java.lang.String cpf
