@@ -1,7 +1,4 @@
 package com.example.treinamento.dto;
-import com.example.treinamento.annotation.Atributo;
-import com.example.treinamento.annotation.Classe;
-import java.util.List;
 
 public class CarroDTO { 
 private String modelo; 
@@ -15,7 +12,7 @@ this.marca = marca;
 }
 
 public String getModelo() { 
-return modelo;
+return modelo;	
 }
 public String getMarca() { 
 return marca;

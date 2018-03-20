@@ -37,7 +37,7 @@ public class ClasseDTO {
 			for (Field field : clazz.getDeclaredFields()) {
 				field.setAccessible(true);
 				if (field.isAnnotationPresent(Atributo.class)) {
-					atributosAnotados.put(field.getName(), field.getType().getTypeName().substring(10));
+					atributosAnotados.put(field.getName(),  field.getType().getSimpleName());
 				}
 			}
 			String classe = criarClasse(atributosAnotados, nomeClasse, caminho);
