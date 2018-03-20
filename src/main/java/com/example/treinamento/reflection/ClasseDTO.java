@@ -20,16 +20,17 @@ import com.thoughtworks.qdox.model.JavaSource;
 public class ClasseDTO {
 	private static final String PACKAGE_PATH = "\\src\\main\\java\\com\\example\\treinamento\\model\\%s.java";
 	private static final String CAMINHO_PROJETO = System.getProperty("user.dir");
-	
-	private static String criarClasse(Map<String, String> atributos, String nomeClasse, String caminho) throws FileNotFoundException {
-		String classe = "package " + caminho + ";" + "\n" + atribuirImportsDto(nomeClasse) + "\n" + "public class " + nomeClasse + "DTO" + " { \n"
-				+ criarAtributos(atributos) + "\n" + criarConstrutorVazio(nomeClasse) + "\n"
-				+ criarConstrutor(atributos, nomeClasse) + "\n" + criarGet(atributos) + "\n" + criarSet(atributos)
-				+ "\n" + " }";
+
+	private static String criarClasse(Map<String, String> atributos, String nomeClasse, String caminho)
+			throws FileNotFoundException {
+		String classe = "package " + caminho + ";" + "\n" + atribuirImportsDto(nomeClasse) + "\n" + "public class "
+				+ nomeClasse + "DTO" + " { \n" + criarAtributos(atributos) + "\n" + criarConstrutorVazio(nomeClasse)
+				+ "\n" + criarConstrutor(atributos, nomeClasse) + "\n" + criarGet(atributos) + "\n"
+				+ criarSet(atributos) + "\n" + " }";
 		return classe;
 	}
 
-	public static void atributos(Class<?> clazz) throws Serialize {
+	private static void atributos(Class<?> clazz) throws Serialize {
 		try {
 			Map<String, String> atributosAnotados = new HashedMap();
 			String nomeClasse = clazz.getName().substring(30);
@@ -37,7 +38,12 @@ public class ClasseDTO {
 			for (Field field : clazz.getDeclaredFields()) {
 				field.setAccessible(true);
 				if (field.isAnnotationPresent(Atributo.class)) {
-					atributosAnotados.put(field.getName(),  field.getType().getSimpleName());
+					if (field.getName().equals("carro") || field.getName().equals("cliente")) {
+						atributosAnotados.put(field.getName() + "DTO", field.getType().getSimpleName() + "DTO");
+					} else {
+						atributosAnotados.put(field.getName(), field.getType().getSimpleName());
+					}
+
 				}
 			}
 			String classe = criarClasse(atributosAnotados, nomeClasse, caminho);
@@ -103,42 +109,36 @@ public class ClasseDTO {
 			atributos(controller);
 		}
 	}
-	
+
 	private static String getPath(String nomeClasse) {
 		String path = String.format("%s%s", CAMINHO_PROJETO, PACKAGE_PATH);
 		return String.format(path, nomeClasse);
 	}
-	
-	public static Map<String, String> pegarImports(String nomeClasse) throws FileNotFoundException {
-	    JavaDocBuilder builder = new JavaDocBuilder();
-	    builder.addSource(new FileReader(getPath(nomeClasse)));
-	    
-		Map<String, String> importsModel = new HashedMap();
-	    
-	    JavaSource src = builder.getSources()[0];
-	    String[] imports = src.getImports();
 
-	    for ( String imp : imports )
-	    {
-	       importsModel.put(imp, "import");
-	    }
-	    return importsModel;
+	private static Map<String, String> pegarImports(String nomeClasse) throws FileNotFoundException {
+		JavaDocBuilder builder = new JavaDocBuilder();
+		builder.addSource(new FileReader(getPath(nomeClasse)));
+
+		Map<String, String> importsModel = new HashedMap();
+
+		JavaSource src = builder.getSources()[0];
+		String[] imports = src.getImports();
+
+		for (String imp : imports) {
+			importsModel.put(imp, "import");
+		}
+		return importsModel;
 	}
-	
-	public static String atribuirImportsDto(String nomeClasse) throws FileNotFoundException {
-		
-		Map<String,String> importsModel = pegarImports(nomeClasse);
-		
-		String ImportsDTO = importsModel
-							.entrySet()
-							.stream()
-							.map(var-> 
-								var.getValue() + " " +  var.getKey() + ";"	+ "\n" 
-								)
-							.collect(joining());
-		
+
+	private static String atribuirImportsDto(String nomeClasse) throws FileNotFoundException {
+
+		Map<String, String> importsModel = pegarImports(nomeClasse);
+
+		String ImportsDTO = importsModel.entrySet().stream()
+				.map(var -> var.getValue() + " " + var.getKey() + ";" + "\n").collect(joining());
+
 		return ImportsDTO;
-		
+
 	}
 
 }

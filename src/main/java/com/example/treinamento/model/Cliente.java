@@ -12,5 +12,6 @@ public class Cliente {
 	@Atributo
 	private String telefone;
 
+	@Atributo
 	private Carro carro;
 }

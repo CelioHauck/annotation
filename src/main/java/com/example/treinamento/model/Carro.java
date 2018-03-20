@@ -16,5 +16,6 @@ public class Carro {
 
 	private String cor;
 
+	@Atributo
 	private List<String> cores;
 }
