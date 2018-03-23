@@ -1,38 +1,35 @@
-package com.example.treinamento.dto;
-import com.example.treinamento.annotation.Atributo;
-import com.example.treinamento.annotation.Classe;
+package com.example.treinamento.dto; 
+
+import java.util.List; 
 
 public class ClienteDTO { 
-private String nome; 
-private CarroDTO carroDTO; 
-private String telefone; 
 
-public ClienteDTO() {
-}
-public ClienteDTO( String nome, CarroDTO carroDTO, String telefone) {
-this.nome = nome;
-this.carroDTO = carroDTO;
-this.telefone = telefone;
-}
+    private String telefone; 
+    private String nome; 
+    private List<CarroDTO> carros; 
 
-public String getNome() { 
-return nome;
-}
-public CarroDTO getCarroDTO() { 
-return carroDTO;
-}
-public String getTelefone() { 
-return telefone;
-}
+    public String getTelefone() { 
+        return this.telefone; 
+    } 
 
-public void setNome(String nome) { 
-this.nome = nome;
-}
-public void setCarroDTO(CarroDTO carroDTO) { 
-this.carroDTO = carroDTO;
-}
-public void setTelefone(String telefone) { 
-this.telefone = telefone;
-}
+    public String getNome() { 
+        return this.nome; 
+    } 
 
- }
+    public List<CarroDTO> getCarros() { 
+        return this.carros; 
+    } 
+
+    public void setTelefone(String telefone) { 
+        this.telefone = telefone; 
+    } 
+
+    public void setNome(String nome) { 
+        this.nome = nome; 
+    } 
+
+    public void setCarros(List<CarroDTO> carros) { 
+        this.carros = carros; 
+    } 
+
+}

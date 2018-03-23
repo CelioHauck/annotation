@@ -2,20 +2,20 @@ package com.example.treinamento.model;
 
 import java.util.List;
 
-import com.example.treinamento.annotation.Atributo;
-import com.example.treinamento.annotation.Classe;
+import com.example.treinamento.annotation.AtributoClasseDTO;
+import com.example.treinamento.annotation.ClasseModeloDTO;
 
-@Classe
+@ClasseModeloDTO
 public class Carro {
 
-	@Atributo
+	@AtributoClasseDTO
 	private String marca;
 
-	@Atributo
+	@AtributoClasseDTO
 	private String modelo;
 
 	private String cor;
 
-	@Atributo
+	@AtributoClasseDTO
 	private List<String> cores;
 }

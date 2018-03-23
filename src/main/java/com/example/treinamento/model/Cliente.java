@@ -1,17 +1,20 @@
 package com.example.treinamento.model;
 
-import com.example.treinamento.annotation.Atributo;
-import com.example.treinamento.annotation.Classe;
 
-@Classe
+import java.util.List;
+
+import com.example.treinamento.annotation.AtributoClasseDTO;
+import com.example.treinamento.annotation.ClasseModeloDTO;
+
+//@ClasseModeloDTO
 public class Cliente {
 
-	@Atributo
+	@AtributoClasseDTO
 	private String nome;
 
-	@Atributo
+	@AtributoClasseDTO
 	private String telefone;
 
-	@Atributo
-	private Carro carro;
+	@AtributoClasseDTO(isTipoComplexo = true)
+	private List<Carro> carros;
 }
