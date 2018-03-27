@@ -11,7 +11,7 @@ public class TreinamentoApplication {
 
 	public static void main(String[] args) throws Serialize {
 		try {
-			CriadorClasse.criarDTOS();
+			CriadorClasse.criarDTOS("com.example.treinamento.model");
 			SpringApplication.run(TreinamentoApplication.class, args);
 		} 
 		catch (Exception e) {

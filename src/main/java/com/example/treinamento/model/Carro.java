@@ -11,7 +11,6 @@ public class Carro {
 	@AtributoClasseDTO
 	private String marca;
 
-	@AtributoClasseDTO
 	private String modelo;
 
 	private String cor;

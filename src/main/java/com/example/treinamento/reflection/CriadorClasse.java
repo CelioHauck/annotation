@@ -18,8 +18,8 @@ import com.google.common.reflect.Reflection;
 
 public class CriadorClasse {
 	
-	public static void criarDTOS() throws Serialize {
-		Set<Class<?>> classesAnotadas = new Reflections("com.example").getTypesAnnotatedWith(ClasseModeloDTO.class);
+	public static void criarDTOS(String pacoteModel) throws Serialize {
+		Set<Class<?>> classesAnotadas = new Reflections(pacoteModel).getTypesAnnotatedWith(ClasseModeloDTO.class);
 		for (Class<?> classe : classesAnotadas) {
 			criarClasseDTO(classe);
 		}

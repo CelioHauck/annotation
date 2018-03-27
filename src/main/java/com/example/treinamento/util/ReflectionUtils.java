@@ -38,7 +38,7 @@ public final class ReflectionUtils {
 	}
 	
 	private static String montarNomeTipoListDTO(String nomeClasseList) {
-		return String.format("List<%s>DTO", nomeClasseList);
+		return String.format("List<%sDTO>", nomeClasseList);
 	}
 	
 	public static String montarNomeTipoList(Field fieldLista) {
